@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns:ma="http://www.marketing-agents.org/ontology#">
+
+    <!-- Base Agent Class -->
+    <owl:Class rdf:about="#MarketingAgent">
+        <rdfs:label>Marketing Agent</rdfs:label>
+        <ma:description>Base class for all marketing agents</ma:description>
+        <ma:uses>LangChain</ma:uses>
+        <ma:uses>OpenAI GPT-4</ma:uses>
+    </owl:Class>
+
+    <!-- CEO Agent -->
+    <owl:Class rdf:about="#CEOAgent">
+        <rdfs:subClassOf rdf:resource="#MarketingAgent"/>
+        <ma:description>Orchestrates the entire marketing planning process</ma:description>
+        <ma:responsibility>Analyze incoming marketing requests</ma:responsibility>
+        <ma:responsibility>Break down complex tasks into department-specific tasks</ma:responsibility>
+        <ma:responsibility>Review summarized plan and create final response</ma:responsibility>
+        <ma:delegates_to>SEOManager</ma:delegates_to>
+        <ma:delegates_to>ContentMarketingManager</ma:delegates_to>
+        <ma:delegates_to>DigitalStrategyManager</ma:delegates_to>
+        <ma:delegates_to>AdvertisingManager</ma:delegates_to>
+        <ma:delegates_to>SocialMediaManager</ma:delegates_to>
+        <ma:delegates_to>EmailMarketingManager</ma:delegates_to>
+        <ma:delegates_to>AnalyticsManager</ma:delegates_to>
+        <ma:receives_from>SummarizerAgent</ma:receives_from>
+    </owl:Class>
+
+    <!-- SEO Manager -->
+    <owl:Class rdf:about="#SEOManager">
+        <rdfs:subClassOf rdf:resource="#MarketingAgent"/>
+        <ma:description>Handles search engine optimization strategy</ma:description>
+        <ma:responsibility>Keyword research and analysis</ma:responsibility>
+        <ma:responsibility>SEO strategy recommendations</ma:responsibility>
+        <ma:responsibility>Metadata optimization guidelines</ma:responsibility>
+        <ma:reports_to>SummarizerAgent</ma:reports_to>
+        <ma:receives_from>CEOAgent</ma:receives_from>
+    </owl:Class>
+
+    <!-- Content Marketing Manager -->
+    <owl:Class rdf:about="#ContentMarketingManager">
+        <rdfs:subClassOf rdf:resource="#MarketingAgent"/>
+        <ma:description>Manages content strategy and creation</ma:description>
+        <ma:responsibility>Define content themes and topics</ma:responsibility>
+        <ma:responsibility>Recommend content types and formats</ma:responsibility>
+        <ma:responsibility>Plan content distribution strategy</ma:responsibility>
+        <ma:output_format>ContentResponse</ma:output_format>
+        <ma:reports_to>SummarizerAgent</ma:reports_to>
+        <ma:receives_from>CEOAgent</ma:receives_from>
+    </owl:Class>
+
+    <!-- Digital Strategy Manager -->
+    <owl:Class rdf:about="#DigitalStrategyManager">
+        <rdfs:subClassOf rdf:resource="#MarketingAgent"/>
+        <ma:description>Develops overall digital marketing strategy</ma:description>
+        <ma:responsibility>Set marketing goals and objectives</ma:responsibility>
+        <ma:responsibility>Create comprehensive digital strategy</ma:responsibility>
+        <ma:responsibility>Define success metrics</ma:responsibility>
+        <ma:output_format>StrategyResponse</ma:output_format>
+        <ma:reports_to>SummarizerAgent</ma:reports_to>
+        <ma:receives_from>CEOAgent</ma:receives_from>
+    </owl:Class>
+
+    <!-- Advertising Manager -->
+    <owl:Class rdf:about="#AdvertisingManager">
+        <rdfs:subClassOf rdf:resource="#MarketingAgent"/>
+        <ma:description>Manages paid advertising campaigns</ma:description>
+        <ma:responsibility>Select advertising platforms</ma:responsibility>
+        <ma:responsibility>Plan campaign types and structure</ma:responsibility>
+        <ma:responsibility>Allocate budget across channels</ma:responsibility>
+        <ma:output_format>AdvertisingResponse</ma:output_format>
+        <ma:reports_to>SummarizerAgent</ma:reports_to>
+        <ma:receives_from>CEOAgent</ma:receives_from>
+    </owl:Class>
+
+    <!-- Social Media Manager -->
+    <owl:Class rdf:about="#SocialMediaManager">
+        <rdfs:subClassOf rdf:resource="#MarketingAgent"/>
+        <ma:description>Handles social media strategy and execution</ma:description>
+        <ma:responsibility>Choose social platforms</ma:responsibility>
+        <ma:responsibility>Create content strategy</ma:responsibility>
+        <ma:responsibility>Plan posting schedule</ma:responsibility>
+        <ma:output_format>SocialMediaResponse</ma:output_format>
+        <ma:reports_to>SummarizerAgent</ma:reports_to>
+        <ma:receives_from>CEOAgent</ma:receives_from>
+    </owl:Class>
+
+    <!-- Email Marketing Manager -->
+    <owl:Class rdf:about="#EmailMarketingManager">
+        <rdfs:subClassOf rdf:resource="#MarketingAgent"/>
+        <ma:description>Manages email marketing campaigns</ma:description>
+        <ma:responsibility>Design email campaign types</ma:responsibility>
+        <ma:responsibility>Create email content strategy</ma:responsibility>
+        <ma:responsibility>Plan automation workflows</ma:responsibility>
+        <ma:output_format>EmailResponse</ma:output_format>
+        <ma:reports_to>SummarizerAgent</ma:reports_to>
+        <ma:receives_from>CEOAgent</ma:receives_from>
+    </owl:Class>
+
+    <!-- Analytics Manager -->
+    <owl:Class rdf:about="#AnalyticsManager">
+        <rdfs:subClassOf rdf:resource="#MarketingAgent"/>
+        <ma:description>Handles marketing analytics and reporting</ma:description>
+        <ma:responsibility>Define key metrics</ma:responsibility>
+        <ma:responsibility>Set up tracking requirements</ma:responsibility>
+        <ma:responsibility>Create reporting schedule</ma:responsibility>
+        <ma:output_format>AnalyticsResponse</ma:output_format>
+        <ma:reports_to>SummarizerAgent</ma:reports_to>
+        <ma:receives_from>CEOAgent</ma:receives_from>
+    </owl:Class>
+
+    <!-- Summarizer Agent -->
+    <owl:Class rdf:about="#SummarizerAgent">
+        <rdfs:subClassOf rdf:resource="#MarketingAgent"/>
+        <ma:description>Consolidates and integrates all agent responses</ma:description>
+        <ma:responsibility>Collect all department responses</ma:responsibility>
+        <ma:responsibility>Create integrated marketing plan</ma:responsibility>
+        <ma:responsibility>Generate implementation timeline</ma:responsibility>
+        <ma:reports_to>CEOAgent</ma:reports_to>
+        <ma:receives_from>SEOManager</ma:receives_from>
+        <ma:receives_from>ContentMarketingManager</ma:receives_from>
+        <ma:receives_from>DigitalStrategyManager</ma:receives_from>
+        <ma:receives_from>AdvertisingManager</ma:receives_from>
+        <ma:receives_from>SocialMediaManager</ma:receives_from>
+        <ma:receives_from>EmailMarketingManager</ma:receives_from>
+        <ma:receives_from>AnalyticsManager</ma:receives_from>
+    </owl:Class>
+
+</rdf:RDF>
